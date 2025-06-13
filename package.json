@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jsdom": "^26.1.0",
+    "mammoth": "^1.9.1",
     "next": "15.3.3",
     "openai": "^5.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
