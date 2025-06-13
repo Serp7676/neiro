@@ -11,12 +11,9 @@ const openai = new OpenAI({
 });
 
 // Асинхронная функция для загрузки и конвертации .docx в текст
-async function loadDocxAsText(filename: string): Promise<string> {
+async function loadTxt(filename: string): Promise<string> {
   const filePath = path.join(process.cwd(), 'public', 'docs', filename);
-  const fileBuffer = await readFile(filePath);
-  const result = await convertToHtml({ buffer: fileBuffer });
-  const dom = new JSDOM(result.value);
-  return dom.window.document.body.textContent || '';
+  return await readFile(filePath, 'utf-8');
 }
 
 export async function POST(req: NextRequest) {
@@ -24,8 +21,8 @@ export async function POST(req: NextRequest) {
 
   try {
     // Загрузка инструкций и знаний
-    const instructions = await loadDocxAsText('instructions.docx');
-    const knowledge = await loadDocxAsText('knowledge.docx');
+    const instructions = await loadTxt('instructions.txt');
+    const knowledge = await loadTxt('knowledge.txt');
 
     // Сбор system-промта с инструкциями и знаниями
     const systemPrompt = `
